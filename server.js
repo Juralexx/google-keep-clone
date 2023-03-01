@@ -1,5 +1,8 @@
 import express from 'express'
 import cors from 'cors'
+import helmet from 'helmet'
+import { rateLimit } from 'express-rate-limit'
+import ExpressMongoSanitize from 'express-mongo-sanitize'
 import bodyParser from 'body-parser'
 import dotenv from 'dotenv'
 dotenv.config({ path: './config.env' })
@@ -9,23 +12,44 @@ import noteRoutes from './routes/note.routes.js'
 const app = express()
 
 app.use(cors({
-    mode: 'no-cors',
-    credentials: true,
-    origin: process.env.FRONT_URL,
+    'credentials': true,
+    'origin': process.env.FRONT_URL,
     "Access-Control-Allow-Origin": process.env.FRONT_URL,
     'allowedHeaders': ['sessionId', 'Content-Type', 'Authorization'],
     'exposedHeaders': ['sessionId'],
     'methods': 'GET, OPTIONS, HEAD, PUT, PATCH, POST, DELETE',
     'preflightContinue': false,
 }))
-app.use(express.json({ limit: '50mb' }))
+
+app.use(helmet())
+
+const limiter = rateLimit({
+    windowMs: 60 * 1000,
+    max: 150,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: 'Too Many Request from this IP, your IP has been blocked. Please try again later.'
+})
+
+app.use(limiter)
+
+app.use(express.json({ limit: '15kb' }))
 app.use(bodyParser.urlencoded({
     extended: false,
-    limit: '50mb'
+    limit: '15kb'
 }))
-app.use(bodyParser.json({ limit: '50mb' }))
+
+app.use(bodyParser.json({ limit: '15kb' }))
+
+app.use(ExpressMongoSanitize({
+    allowDots: true,
+}));
 
 app.use('/api/note', noteRoutes)
+
+app.get("*", async (req, res) => {
+    return res.status(400).json({ error: `This route doesn't existes.` })
+})
 
 if (process.env.NODE_ENV !== 'production') {
     process.once('uncaughtException', err => {
