@@ -56,6 +56,10 @@ export default Note
 
 const NoteItem = styled.div<{ background: any, color: any }>`
     position            : relative;
+    width               : 100%;
+    margin-bottom       : 20px;
+    display             : inline-block;
+    vertical-align      : top;
     transition          : all .2s ease-in-out;
     overflow-wrap       : break-word;
     border-radius       : var(--rounded-lg);

@@ -8,11 +8,11 @@ import NoteModal from './components/NoteModal';
 import SemiCicle from './components/tools/loader/SemiCicle';
 import GlobalStyles from './styles/GlobalStyles';
 import { NoteContext, NotesContext } from './AppContexts';
-import { NoteProps, defaultNoteProps, NotesProps, defaultNotesProps } from './types/types';
+import { NoteProps, defaultNoteProps, Notes } from './types/types';
 import { reverseArray } from './components/tools/Utils';
 
 const App: React.FC = () => {
-    const [notes, setNotes] = React.useState<NotesProps>(defaultNotesProps)
+    const [notes, setNotes] = React.useState<Notes.Props>(Notes.defaultProps)
     const [note, setNote] = React.useState<NoteProps>(defaultNoteProps)
     const [isLoading, setLoading] = React.useState<boolean>(true)
 
@@ -101,9 +101,16 @@ const RootInner = styled.div`
 `
 
 const NoteContainer = styled.div`
-    position              : relative;
-    display               : grid;
-    grid-gap              : 20px;
-    grid-template-columns : repeat(auto-fill, minmax(270px, 1fr));
-    margin                : 50px auto;
+    position     : relative;
+    column-gap   : 20px;
+    column-fill  : initial;
+    margin       : 50px auto;
+    column-count : 3;
+
+    @media only screen and (min-width: 577px) and (max-width: 992px) {
+        column-count : 2;
+    }
+    @media only screen and (max-width: 576px) {
+        column-count : 1;
+    }
 `

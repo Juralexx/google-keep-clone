@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { NotesContext } from '../AppContexts'
-import { AreaProps, defaultAreaProps } from '../types/types'
+import { Area } from '../types/types'
 import Palette from './Palette'
 import Icon from './tools/icons/Icon'
 import { ClassicInput, Textarea } from './tools/Inputs'
@@ -12,7 +12,7 @@ import { useClickOutside } from './tools/hooks/useClickOutside'
 
 const NoteArea: React.FC = () => {
     const { setNotes } = React.useContext(NotesContext)
-    const [area, setArea] = React.useState<AreaProps>(defaultAreaProps)
+    const [area, setArea] = React.useState<Area.Props>(Area.defaultProps)
 
     const [open, setOpen] = React.useState<boolean>(false)
     const noteAreaRef = React.useRef() as React.MutableRefObject<HTMLDivElement>
@@ -21,7 +21,7 @@ const NoteArea: React.FC = () => {
         if (area.text.trim().length || area.title.trim().length || area.color.trim().length || area.background.trim().length) {
             const element = Object.assign(area, { _id: randomNbLtID(24) })
             setNotes((prev: any) => ({ all: [element, ...prev.all], filtered: [element, ...prev.filtered] }))
-            setArea(defaultAreaProps)
+            setArea(Area.defaultProps)
             await createNote(element)
         }
     })
@@ -33,7 +33,7 @@ const NoteArea: React.FC = () => {
             if (area.text.trim().length || area.title.trim().length || area.color.trim().length || area.background.trim().length) {
                 const element = Object.assign(area, { _id: randomNbLtID(24) })
                 setNotes((prev: any) => ({ all: [element, ...prev.all], filtered: [element, ...prev.filtered] }))
-                setArea(defaultAreaProps)
+                setArea(Area.defaultProps)
                 await createNote(element)
             }
         }

@@ -1,28 +1,40 @@
 export { };
 
-export interface AreaProps {
-    title: string,
-    text: string,
-    color: string,
-    background: string
+export namespace Area {
+    export interface Props {
+        title: string,
+        text: string,
+        color: string,
+        background: string
+    }
+
+    export const defaultProps: Props = {
+        title: '',
+        text: '',
+        color: '',
+        background: ''
+    }
 }
 
-export const defaultAreaProps: AreaProps = {
-    title: '',
-    text: '',
-    color: '',
-    background: ''
+/**
+ * 
+ */
+
+export namespace Notes {
+    export interface Props {
+        all: any[],
+        filtered: any[]
+    }
+
+    export const defaultProps: Props = {
+        all: [],
+        filtered: []
+    }
 }
 
-export interface NotesProps {
-    all: any[],
-    filtered: any[]
-}
-
-export const defaultNotesProps: NotesProps = {
-    all: [],
-    filtered: []
-}
+/**
+ * 
+ */
 
 export interface NoteProps {
     _id?: string,
@@ -40,6 +52,10 @@ export const defaultNoteProps: NoteProps = {
     color: '',
     background: ''
 }
+
+/**
+ * 
+ */
 
 export interface SearchProps {
     state: boolean,

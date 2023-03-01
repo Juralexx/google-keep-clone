@@ -1,7 +1,7 @@
 import axios from "axios"
-import { NoteProps, NotesProps } from "../../types/types"
+import { NoteProps, Notes } from "../../types/types"
 
-export const findNote = (notes: NotesProps, note: NoteProps) => {
+export const findNote = (notes: Notes.Props, note: NoteProps) => {
     let array: any[] = [...notes.all]
     let current: NoteProps = array.find((e: NoteProps) => e._id === note._id)
     let index: number = array.findIndex((e: NoteProps) => e._id === note._id)

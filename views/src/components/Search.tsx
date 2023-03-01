@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Icon from './tools/icons/Icon'
 import { IconInput } from './tools/Inputs'
 import { NotesContext } from '../AppContexts'
-import { SearchProps, defaultSearchProps, NoteProps, NotesProps } from '../types/types'
+import { SearchProps, defaultSearchProps, NoteProps, Notes } from '../types/types'
 import { highlightSearchResults, removeAccents } from './tools/Utils'
 
 const Search: React.FC = () => {
@@ -20,14 +20,14 @@ const Search: React.FC = () => {
             const response = notes.all.filter((element: NoteProps) => regexp.test(removeAccents(element['title'])) || regexp.test(removeAccents(element['text'])))
 
             setSearch(prevState => ({ ...prevState, state: true, results: response }))
-            setNotes((prev: NotesProps) => ({ ...prev, filtered: response }))
+            setNotes((prev: Notes.Props) => ({ ...prev, filtered: response }))
             highlightSearchResults(query, 'note__text')
             highlightSearchResults(query, 'note__body')
             if (isEmpty)
                 return
         } else {
             setSearch(prevState => ({ ...prevState, state: false }))
-            setNotes((prev: NotesProps) => ({ ...prev, filtered: notes.all }))
+            setNotes((prev: Notes.Props) => ({ ...prev, filtered: notes.all }))
         }
     }
 
