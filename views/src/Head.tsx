@@ -5,8 +5,8 @@ const Head = () => {
 
     const metadatas = {
         site_name: 'Google Keep Clone',
-        title: 'A micro Google Keep clone built using React, Typescript and Express.',
-        description: 'A micro Google Keep clone built using React, Typescript and Express.',
+        title: 'A small Google Keep clone built using React, Typescript and Express.',
+        description: 'A small Google Keep clone built using React, Typescript and Express.',
         image: `${process.env.REACT_APP_URL}/img/logo.png`,
         url: `${process.env.REACT_APP_URL}${pathname}`
     }
