@@ -47,7 +47,7 @@ const NoteArea: React.FC = () => {
                         type="text"
                         placeholder="Title"
                         value={area.title}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setArea((prev: any) => ({ ...prev, title: e.target.value }))}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setArea((prev: Area.Props) => ({ ...prev, title: e.target.value }))}
                         cross
                         onClean={() => setArea((prev: Area.Props) => ({ ...prev, title: '' }))}
                         onKeyPress={(event: React.KeyboardEvent<HTMLInputElement>) => addNote(event)}
