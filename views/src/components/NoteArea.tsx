@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { NotesContext } from '../AppContexts'
-import { Area } from '../types/types'
+import { Area, Notes } from '../types/types'
 import Palette from './Palette'
 import Icon from './tools/icons/Icon'
 import { ClassicInput, Textarea } from './tools/Inputs'
@@ -20,7 +20,7 @@ const NoteArea: React.FC = () => {
         setOpen(false)
         if (area.text.trim().length || area.title.trim().length || area.color.trim().length || area.background.trim().length) {
             const element = Object.assign(area, { _id: randomNbLtID(24) })
-            setNotes((prev: any) => ({ all: [element, ...prev.all], filtered: [element, ...prev.filtered] }))
+            setNotes((prev: Notes.Props) => ({ all: [element, ...prev.all], filtered: [element, ...prev.filtered] }))
             setArea(Area.defaultProps)
             await createNote(element)
         }
@@ -32,7 +32,7 @@ const NoteArea: React.FC = () => {
         if (event.key === 'Enter') {
             if (area.text.trim().length || area.title.trim().length || area.color.trim().length || area.background.trim().length) {
                 const element = Object.assign(area, { _id: randomNbLtID(24) })
-                setNotes((prev: any) => ({ all: [element, ...prev.all], filtered: [element, ...prev.filtered] }))
+                setNotes((prev: Notes.Props) => ({ all: [element, ...prev.all], filtered: [element, ...prev.filtered] }))
                 setArea(Area.defaultProps)
                 await createNote(element)
             }
@@ -49,7 +49,7 @@ const NoteArea: React.FC = () => {
                         value={area.title}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setArea((prev: any) => ({ ...prev, title: e.target.value }))}
                         cross
-                        onClean={() => setArea((prev: any) => ({ ...prev, title: '' }))}
+                        onClean={() => setArea((prev: Area.Props) => ({ ...prev, title: '' }))}
                         onKeyPress={(event: React.KeyboardEvent<HTMLInputElement>) => addNote(event)}
                     />
                     <Textarea
