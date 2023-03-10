@@ -27,7 +27,7 @@ const Palette: React.FC<Props> = ({ note, setNote }) => {
                                 <div key={i}
                                     className={`palette__item ${addActive(note.color === color.hex)}`}
                                     style={{ backgroundColor: color.hex }}
-                                    onClick={() => setNote((prev: any) => ({ ...prev, color: color.hex }))}
+                                    onClick={() => setNote((prev: NoteProps) => ({ ...prev, color: color.hex }))}
                                 >
                                     {note.color === color.hex && <Icon name="Check" />}
                                 </div>
@@ -36,7 +36,7 @@ const Palette: React.FC<Props> = ({ note, setNote }) => {
                     </div>
                     <div className='palette__displayer-bottom'>
                         <div className={`palette__img ${addActive(note.background === '')}`}
-                            onClick={() => setNote((prev: any) => ({ ...prev, background: '' }))}
+                            onClick={() => setNote((prev: NoteProps) => ({ ...prev, background: '' }))}
                         >
                             <img src={`${process.env.REACT_APP_URL}/backgrounds/empty_img.png`} alt='empty-img' />
                         </div>
@@ -45,7 +45,7 @@ const Palette: React.FC<Props> = ({ note, setNote }) => {
                             return (
                                 <div key={i}
                                     className={`palette__img ${addActive(note.background === bg)}`}
-                                    onClick={() => setNote((prev: any) => ({ ...prev, background: bg }))}
+                                    onClick={() => setNote((prev: NoteProps) => ({ ...prev, background: bg }))}
                                 >
                                     <img src={bg} alt={`background-${i + 1}.svg`} />
                                     {note.background === bg &&
