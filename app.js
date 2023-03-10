@@ -7,6 +7,9 @@ import bodyParser from 'body-parser'
 import dotenv from 'dotenv'
 dotenv.config({ path: './config.env' })
 import './config/db.js'
+import path from 'path'
+import { fileURLToPath } from 'url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 import noteRoutes from './routes/note.routes.js'
 
 const app = express()
@@ -64,6 +67,16 @@ app.use('/api/note', noteRoutes)
 app.get("*", async (req, res) => {
     return res.status(400).json({ error: `This route doesn't existes.` })
 })
+
+const router = express.Router()
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.resolve(__dirname, `./build/`)))
+
+    router.get('/', (_, res) => {
+        res.sendFile(path.join(__dirname, 'index.html'))
+    });
+}
 
 if (process.env.NODE_ENV !== 'production') {
     process.once('uncaughtException', err => {
