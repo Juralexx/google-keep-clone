@@ -71,6 +71,6 @@ export const deleteNote = async (note: NoteProps) => {
         method: "delete",
         url: `${process.env.REACT_APP_API_URL}/api/note/delete/${note._id}`
     })
-        .then(res => console.log(res))
+        .then(res => res.data)
         .catch(err => console.error(err))
 }
