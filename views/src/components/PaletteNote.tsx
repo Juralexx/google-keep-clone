@@ -25,7 +25,7 @@ const PaletteNote: React.FC<Props> = ({ note, position }) => {
         const { array, current, index } = findNote(notes, note)
         array[index] = { ...current, background: background }
         setNotes({ all: [...array], filtered: [...array] })
-        setNote((prev: any) => ({ ...prev, background: background }))
+        setNote((prev: NoteProps) => ({ ...prev, background: background }))
         await updateNote({ ...current, background: background })
     }
 
@@ -33,7 +33,7 @@ const PaletteNote: React.FC<Props> = ({ note, position }) => {
         const { array, current, index } = findNote(notes, note)
         array[index] = { ...current, color: color }
         setNotes({ all: [...array], filtered: [...array] })
-        setNote((prev: any) => ({ ...prev, color: color }))
+        setNote((prev: NoteProps) => ({ ...prev, color: color }))
         await updateNote({ ...current, color: color })
     }
 
