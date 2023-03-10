@@ -62,12 +62,6 @@ app.use(ExpressMongoSanitize({
     allowDots: true,
 }));
 
-app.use('/api/note', noteRoutes)
-
-app.get("*", async (req, res) => {
-    return res.status(400).json({ error: `This route doesn't existes.` })
-})
-
 const router = express.Router()
 
 if (process.env.NODE_ENV === 'production') {
@@ -77,6 +71,13 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.join(__dirname, 'index.html'))
     });
 }
+
+app.use('/', router)
+app.use('/api/note', noteRoutes)
+
+app.get("*", async (req, res) => {
+    return res.status(400).json({ error: `This route doesn't exists.` })
+})
 
 if (process.env.NODE_ENV !== 'production') {
     process.once('uncaughtException', err => {
