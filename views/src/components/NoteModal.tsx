@@ -65,8 +65,6 @@ const NoteModal: React.FC<Props> = ({ open, setOpen }) => {
                         placeholder="Title"
                         value={note.title}
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => updateTitle(event)}
-                        cross
-                        onClean={() => setNote((prev: any) => ({ ...prev, title: '' }))}
                     />
                     <Textarea
                         type="text"
@@ -140,6 +138,11 @@ const NoteTop = styled.div<{ background: any }>`
         padding    : 5px 10px;
         font-size  : 12px;
         text-align : right;
+    }
+
+    textarea {
+        height     : auto;
+        min-height : 100px;
     }
 `
 
