@@ -13,8 +13,8 @@ const Search: React.FC = () => {
     const launchSearch = (query: string) => {
         setSearch(prev => ({ ...prev, query: query }))
 
-        let isEmpty = !search.results || search.results.length === 0
-        let regexp = new RegExp(removeAccents(query), 'i')
+        let isEmpty: boolean = !search.results || search.results.length === 0
+        let regexp: RegExp = new RegExp(removeAccents(query), 'i')
 
         if (query.length >= 2) {
             const response = notes.all.filter((element: NoteProps) => regexp.test(removeAccents(element['title'])) || regexp.test(removeAccents(element['text'])))
