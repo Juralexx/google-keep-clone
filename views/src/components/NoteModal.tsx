@@ -54,7 +54,7 @@ const NoteModal: React.FC<Props> = ({ open, setOpen }) => {
         }
     }, [open, note])
 
-    const [warning, setWarning] = React.useState(false)
+    const [warning, setWarning] = React.useState<boolean>(false)
 
     return (
         <>
