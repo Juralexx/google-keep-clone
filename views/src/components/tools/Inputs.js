@@ -283,6 +283,7 @@ export const Textarea = (props) => {
             className={`${className ? "textarea " + className : "textarea"}`}
             {...inputProps(props)}
             ref={textareaRef}
+            onClick={e => expandHeight(e)}
             onChange={(e) => {
                 onChange(e)
                 expandHeight(e)
