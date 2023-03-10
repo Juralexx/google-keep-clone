@@ -1,6 +1,6 @@
 {
     "short_name": "Google Keep Clone",
-    "name": "A micro Google Keep Clone built using React, Typescript and Express.",
+    "name": "A small Google Keep Clone built using React, Typescript and Express.",
     "icons": [
         {
             "src": "img/favicon.ico",

@@ -1,12 +1,14 @@
 {
     "name": "google-keep-clone",
     "version": "1.0.0",
-    "description": "A micro Google Keep clone built using React, Typescript and Express.",
+    "description": "A small Google Keep clone built using React, Typescript and Express.",
     "type": "module",
     "main": "server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "nodemon server.js"
+        "start": "node app.js",
+        "back": "nodemon app.js",
+        "front": "npm start --prefix views"
     },
     "author": "Alexandre Vurbier",
     "license": "ISC",
