@@ -11,17 +11,31 @@ import noteRoutes from './routes/note.routes.js'
 
 const app = express()
 
+const FRONT_URL = process.env.NODE_ENV !== 'production' ? process.env.DEV_FRONT_URL : process.env.FRONT_URL
+
 app.use(cors({
     'credentials': true,
-    'origin': process.env.FRONT_URL,
-    "Access-Control-Allow-Origin": process.env.FRONT_URL,
-    'allowedHeaders': ['sessionId', 'Content-Type', 'Authorization'],
-    'exposedHeaders': ['sessionId'],
-    'methods': 'GET, OPTIONS, HEAD, PUT, PATCH, POST, DELETE',
+    'origin': FRONT_URL,
+    'allowedHeaders': ['Content-Length', 'Content-Type', 'application', 'Authorization'],
+    'methods': 'GET, PUT, POST, DELETE',
     'preflightContinue': false,
 }))
 
-app.use(helmet())
+app.use(helmet({
+    crossOriginEmbedderPolicy: false,
+    // crossOriginResourcePolicy: false,
+    crossOriginResourcePolicy: {
+        policy: 'cross-origin'
+    },
+    originAgentCluster: true,
+    contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+            "img-src": ["'self'", "https: data:"],
+            "default-src": ["*"]
+        }
+    }
+}))
 
 const limiter = rateLimit({
     windowMs: 60 * 1000,
@@ -58,7 +72,7 @@ if (process.env.NODE_ENV !== 'production') {
     })
 }
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 5003
 
 app.listen(PORT, () => {
     console.log(`Serveur démarré : http://localhost:${PORT}`)
