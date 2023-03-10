@@ -1,11 +1,9 @@
 import React from 'react'
+import { NoteProps, Notes } from './types/types'
 
 type NotesContextType = {
-    notes: {
-        all: any[],
-        filtered: any[]
-    },
-    setNotes: React.Dispatch<React.SetStateAction<any>>
+    notes: Notes.Props,
+    setNotes: React.Dispatch<React.SetStateAction<Notes.Props>>
 }
 
 const INotesContextTypeState = {
@@ -19,8 +17,8 @@ const INotesContextTypeState = {
 export const NotesContext = React.createContext<NotesContextType>(INotesContextTypeState)
 
 type NoteContextType = {
-    note: { [keys: string]: any },
-    setNote: React.Dispatch<React.SetStateAction<any>>
+    note: NoteProps,
+    setNote: React.Dispatch<React.SetStateAction<NoteProps>>
 }
 
 const INoteContextTypeState = {
